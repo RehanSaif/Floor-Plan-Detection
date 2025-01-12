@@ -945,7 +945,8 @@ def extract_wall_polygon(wall, wall_points, segmentation, seg_class):
         # widths = reject_outliers(widths)
         # if len(widths) == 0:
             # return None
-        wall_width = stats.mode(widths, keepdims=False)
+        mode_result = stats.mode(widths, keepdims=False)
+        wall_width = float(mode_result.mode) if hasattr(mode_result, 'mode') else float(mode_result[0])
         if wall_width > y2 - y1:
             wall_width = y2 - y1
         w_delta = int(wall_width / 2.0)
@@ -1001,7 +1002,8 @@ def extract_wall_polygon(wall, wall_points, segmentation, seg_class):
         # widths = reject_outliers(widths)
         # if len(widths) == 0:
             # return None
-        wall_width = stats.mode(widths, keepdims=False)
+        mode_result = stats.mode(widths, keepdims=False)
+        wall_width = float(mode_result.mode) if hasattr(mode_result, 'mode') else float(mode_result[0])
         if wall_width > x2 - x1:
             wall_width = x2 - x1
         w_delta = int(wall_width / 2.0)
